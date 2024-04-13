@@ -1,20 +1,33 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import Feed from './Feed';
+import NearbyScreen from './Nearby';
+import LeaderBoardScreen from './LeaderBoardScreen';
+import YouScreen from './YouScreen';
+import Profile from './Profile';
 
-export default function App() {
+const Tab = createBottomTabNavigator();
+
+const App = () => {
   return (
-    <View style={styles.container}>
-      <Text>Go do Good!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      <Tab.Navigator 
+        screenOptions={{
+          tabBarStyle: { backgroundColor: '#800020' }, // Color of the tab bar
+          tabBarShowLabel: false,
+          headerShown: false,
+          tabBarHideOnKeyboard: true,
+        }}
+      >
+        <Tab.Screen name="Feed" component={Feed} />
+        <Tab.Screen name="Around You" component={NearbyScreen} />
+        <Tab.Screen name="Leader Board" component={LeaderBoardScreen} />
+        <Tab.Screen name="You" component={YouScreen} />
+        <Tab.Screen name="Profile" component={Profile} />
+      </Tab.Navigator>
+    </NavigationContainer>
   );
-}
+};
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default App;
