@@ -1,45 +1,47 @@
-import React, { useRef, useState } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+// CameraScreen.js
+import React from 'react';
+import { View, StyleSheet, Button } from 'react-native';
 import { RNCamera } from 'react-native-camera';
 
-const CameraScreen = () => {
-    const cameraRef = useRef(null);
+const CameraScreen = ({ route, navigation }) => {
+  const takePicture = async (camera) => {
+    const options = { quality: 0.5, base64: true };
+    const data = await camera.takePictureAsync(options);
+    
+    // Use the callback to send the image data back to the Feed component
+    if (route.params.onPictureTaken) {
+      route.params.onPictureTaken({
+        id: String(Math.random()), // Generate a random id for the key
+        tag: 'New Image', // You can replace this with actual tag data
+        uri: data.uri,
+        description: 'Newly captured image'
+      });
+    }
+    navigation.goBack(); // Navigate back to the Feed screen
+  };
 
-    const takePicture = async () => {
-        if (cameraRef.current) {
-            const options = { quality: 0.5, base64: true };
-            const data = await cameraRef.current.takePictureAsync(options);
-            console.log(data.uri);
-            // You can handle the captured image URI here
-        }
-    };
-
-    return (
-        <View style={{ flex: 1 }}>
-            <RNCamera
-                ref={cameraRef}
-                style={{ flex: 1, justifyContent: 'flex-end', alignItems: 'center' }}
-                type={RNCamera.Constants.Type.back}
-                flashMode={RNCamera.Constants.FlashMode.on}
-            >
-                <TouchableOpacity onPress={takePicture} style={styles.capture}>
-                    <Text style={{ fontSize: 14 }}> SNAP </Text>
-                </TouchableOpacity>
-            </RNCamera>
-        </View>
-    );
+  return (
+    <View style={styles.container}>
+      <RNCamera
+        style={styles.preview}
+        type={RNCamera.Constants.Type.back}
+        flashMode={RNCamera.Constants.FlashMode.auto}
+        captureAudio={false} // Set to false as we are not recording videos
+      >
+        {({ camera, status }) => {
+          if (status !== 'READY') return <View/>;
+          return (
+            <Button title="Take Picture" onPress={() => takePicture(camera)} />
+          );
+        }}
+      </RNCamera>
+    </View>
+  );
 };
 
 const styles = StyleSheet.create({
-    capture: {
-        flex: 0,
-        backgroundColor: '#fff',
-        borderRadius: 5,
-        padding: 15,
-        paddingHorizontal: 20,
-        alignSelf: 'center',
-        margin: 20,
-    },
+  container: { flex: 1 },
+  preview: { flex: 1, justifyContent: 'flex-end', alignItems: 'center' },
 });
 
 export default CameraScreen;
