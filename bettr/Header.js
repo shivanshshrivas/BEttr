@@ -1,7 +1,6 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import Profile from './Profile';
-import Feed from './Feed';
 
 const Header = ({ navigation }) => {
   return (
@@ -12,7 +11,7 @@ const Header = ({ navigation }) => {
         </View>
       </TouchableOpacity>
 
-      <TouchableOpacity onPress={() => navigation.navigate(Feed)}>
+      <TouchableOpacity>
         <Text style={styles.title}>BEttr</Text>
       </TouchableOpacity>
 
