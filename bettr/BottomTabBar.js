@@ -1,44 +1,56 @@
 import React from 'react';
+import Feed from './Feed';
+import Nearby from './Nearby';
+import LeaderBoard from './LeaderBoardScreen';
+import You from './YouScreen';
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 
 const BottomTabBar = ({ navigation }) => {
   const tabs = [
-    { name: 'Feed', screen: 'Feed' },
-    { name: 'Around You', screen: 'Nearby' },
-    { name: 'Leader Board', screen: 'Leader Board' },
-    { name: 'You', screen: 'You' }
+    { name: 'Feed', screen: Feed, icon: '🏠' },
+    { name: 'Around You', screen: Nearby, icon: '📍'},
+    { name: 'Leader Board', screen: LeaderBoard , icon: '🏆'},
+    { name: 'You', screen: You , icon: '👤'}
   ];
 
-  const handlePress = (screenName) => {
-    navigation.navigate(screenName);
-  };
-
   return (
-    <View style={styles.container}>
-      {tabs.map((tab, index) => (
-        <TouchableOpacity key={index} style={styles.button} onPress={() => handlePress(tab.screen)}>
-          <Text>{tab.name}</Text>
+    <View style= {styles.container}>
+        <TouchableOpacity key={index} onPress={() => navigation.navigate(Feed)}>
+          <View>
+            <Text >{tab.icon}</Text>
+          </View>
         </TouchableOpacity>
-      ))}
+        <TouchableOpacity key={index} onPress={() => navigation.navigate(Feed)}>
+          <View>
+            <Text >{tab.icon}</Text>
+          </View>
+        </TouchableOpacity>
+        <TouchableOpacity key={index} onPress={() => navigation.navigate(Feed)}>
+          <View>
+            <Text >{tab.icon}</Text>
+          </View>
+        </TouchableOpacity>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
+  container:{
+    padding: 44,
     flexDirection: 'row',
-    flex: 1,
-    backgroundColor: '#fff',
-    paddingBottom: 15,
-    alignItems: 'flex-end',
-    justifyContent: 'space-evenly'
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    backgroundColor: '#800020', // Set your desired color
+    paddingVertical: 10,
+    paddingHorizontal: 20,
   },
-  button: {
-    padding: 12,
-    borderRadius: 5,
-    borderWidth: 1,
-    borderColor: 'black',
+  profileText: {
+    color: '#ffffff',
+    fontSize: 20,
+    fontWeight: 'bold',
   },
+  
 });
+
 
 export default BottomTabBar;
