@@ -1,18 +1,27 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import { View, Text, StyleSheet, ScrollView, Image, TouchableOpacity } from 'react-native';
 import Header from './Header';
 
 const Feed = ({ navigation }) => {
-  // Placeholder data for your images
-  const [imageData, setImageData] = useState([
-    { tag: 'shivansh', id: '1', uri: 'https://picsum.photos/200/300', description: 'Lorem ipsum...' },
-    { tag: 'jahnvi', id: '2', uri: 'https://picsum.photos/200/300', description: 'Lorem ipsum...' },
-    { tag: 'achinth', id: '3', uri: 'https://picsum.photos/200/300', description: 'Lorem ipsum...' },
-    { tag: 'atticus', id: '4', uri: 'https://picsum.photos/200/300', description: 'Lorem ipsum...' },
-    // Add more images as needed
-  ]);
-  const addNewImage = (newImage) => {
-    setImageData(prevImageData => [newImage, ...prevImageData]);
+  const [imageData, setImageData] = useState([]);
+  const [trigger, setTrigger] = useState(false); // State to trigger re-fetching
+
+  const fetchImages = async () => {
+    try {
+      const response = await fetch('https://d829-129-237-90-141.ngrok-free.app/images');
+      const images = await response.json();
+      setImageData(images);
+    } catch (error) {
+      console.error('Failed to fetch images:', error);
+    }
+  };
+
+  useEffect(() => {
+    fetchImages();
+  }, [trigger]); // Dependency array includes 'trigger' to re-run when it changes
+
+  const handleRefresh = () => {
+    setTrigger(prev => !prev); // Toggle the trigger to force useEffect to run again
   };
 
   return (
@@ -21,18 +30,28 @@ const Feed = ({ navigation }) => {
       <ScrollView style={styles.scrollViewContainer}>
         {imageData.map((image) => (
           <View key={image.id} style={styles.imageContainer}>
-            <Text>@{image.tag}</Text>
-            <Image source={{uri:image.uri}} style={styles.image} />
+            <View style={styles.textContainer}>
+              <Text>@{image.tag}</Text>
+            </View>
+            
+            <Image source={{ uri: image.uri }} style={styles.image} />
             <TouchableOpacity style={styles.likeButton}>
+              <Image source={require('./likeicon.png')} style={styles.likeIcon} />
               <Text style={styles.likeButtonText}>Like</Text>
             </TouchableOpacity>
             <Text style={styles.imageDescription}>{image.description}</Text>
           </View>
         ))}
+        <TouchableOpacity
+          style={styles.refreshButton}
+          onPress={handleRefresh}
+        >
+          <Text>Refresh Images</Text>
+        </TouchableOpacity>
       </ScrollView>
       <TouchableOpacity
         style={styles.fab}
-        onPress={() => navigation.navigate('Camera', { onPictureTaken: addNewImage })}
+        onPress={() => navigation.navigate('Camera')}
       >
         <Text style={styles.fabIcon}>+</Text>
       </TouchableOpacity>
@@ -43,44 +62,61 @@ const Feed = ({ navigation }) => {
 const styles = StyleSheet.create({
   scrollViewContainer: {
     flex: 1,
+    backgroundColor: '#A1686D',
+    
   },
   imageContainer: {
-    width: '90%',
+    width: '98%',
     alignSelf: 'center',
-    overflow: 'hidden', // This ensures the children don't overlap the rounded corners
-    marginVertical: 10, // Spacing between items
-    position: 'relative', // Position relative to allow absolute positioning of like button
-  
+    marginVertical: 10,
+    position: 'relative',
+    backgroundColor: '#A97579',
+    borderRadius: 25,
+    shadowOpacity: 0.5,
+    shadowRadius: 10,
+    shadowColor: '#000',
+    shadowOffset: { height: 2, width: 0 }, // Shadow around images
+  },
+  textContainer: {
+    padding: 10,
+    
+    
   },
   image: {
-    width: '100%',
-    borderRadius: 20, // Rounded corners for the image
-    aspectRatio: 1/1, // Adjust the aspect ratio as needed
+    width: '90%',
+    alignSelf: 'center',
+    height: 'auto',
+    aspectRatio: 1, // Adjust the aspect ratio
+    borderRadius: 20,
   },
   likeButton: {
-    position: 'absolute', // Position the like button over the image
-    bottom: 50,
+    flexDirection: 'row', // Align items horizontally
+    position: 'absolute',
+    bottom: 10,
     right: 10,
-    backgroundColor: 'rgba(255,255,255,0.7)', // Semi-transparent white background
-    padding: 5,
-    borderRadius: 15, // Rounded corners for the like button
+    backgroundColor: '#FFD5C2',
+    padding: 8,
+    borderRadius: 20,
+    alignItems: 'center', // Center items vertically in the button
+  },
+  likeIcon: {
+    width: 20,
+    height: 20, // Set the size of your icon image
   },
   likeButtonText: {
+    marginLeft: 5, // Space between icon and text
     fontSize: 16,
     color: '#000',
   },
   imageDescription: {
-    padding: 10, // Padding inside the description container
-  },
-  container: {
-    justifyContent: 'center',
-    alignItems: 'center',
+    padding: 10,
+    fontFamily: "Times New Roman",
   },
   fab: {
     position: 'absolute',
     right: 20,
-    bottom: 20, // Adjust this value to position it above your bottom bar
-    backgroundColor: '#F02A4B',
+    bottom: 20,
+    backgroundColor: '#FFD5C2',
     width: 60,
     height: 60,
     borderRadius: 30,
@@ -94,7 +130,7 @@ const styles = StyleSheet.create({
   fabIcon: {
     fontSize: 40,
     paddingBottom: 3,
-    color: 'white',
+    color: 'black',
   },
 });
 

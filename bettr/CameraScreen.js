@@ -8,7 +8,7 @@ const CameraScreen = ({ route, navigation }) => {
 
   useEffect(() => {
     (async () => {
-      const { status } = await Camera.requestPermissionsAsync();
+      const { status } = await Camera.requestCameraPermissionsAsync();
       setHasPermission(status === 'granted');
     })();
   }, []);
@@ -16,16 +16,35 @@ const CameraScreen = ({ route, navigation }) => {
   const takePicture = async () => {
     if (cameraRef) {
       const data = await cameraRef.takePictureAsync({ quality: 0.5, base64: true });
-      // Use the callback to send the image data back to the Feed component
-      if (route.params?.onPictureTaken) {
-        route.params.onPictureTaken({
-          id: String(Math.random()), // Generate a random id for the key
-          tag: 'New Image', // You can replace this with actual tag data
-          uri: data.uri,
-          description: 'Newly captured image'
-        });
-      }
-      navigation.goBack(); // Navigate back to the Feed screen
+      
+
+      const imageInfo = {
+        id: String(Math.random()), // Generate a random id for the key
+        tag: 'New Image', // You can replace this with actual tag data
+        uri: data.uri,
+        description: 'Newly captured image',
+        base64: data.base64
+      };
+
+      console.log({ imageInfo }, { depth: null })
+
+      // Send data to your server
+      fetch('https://d829-129-237-90-141.ngrok-free.app/upload', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(imageInfo),
+      })
+      .then(response => response.json())
+      .then(responseData => {
+        console.log(responseData);
+        navigation.goBack();
+      })
+      .catch(error => {
+        console.log('error herej');
+        console.error(error);
+      });
     }
   };
 
@@ -41,9 +60,7 @@ const CameraScreen = ({ route, navigation }) => {
       <Camera 
         style={styles.preview} 
         type={Camera.Constants.Type.back}
-        ref={(ref) => {
-          setCameraRef(ref);
-        }}
+        ref={ref => setCameraRef(ref)}
       >
         <View style={styles.buttonContainer}>
           <Button title="Take Picture" onPress={takePicture} />
