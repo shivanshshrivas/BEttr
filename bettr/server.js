@@ -48,7 +48,6 @@ app.get('/')
 // Add an endpoint to handle file uploads
 app.post('/upload', upload.single('image'), (req, res) => {
 console.log('recieved POST request /upload');
-console.log(req.body);
 
   let base64Data = req.body.base64;
     if (!base64Data.startsWith('data:image/jpeg;base64,')) {
@@ -74,10 +73,12 @@ app.get('/images', async (req, res) => {
             id: image.id,
             tag: image.tag,
             description: image.description,
-            uri: `${image.base64}`
+            uri: image.base64,
         }));
+        
         res.json(formattedImages);
     } catch (error) {
+        console.log("Here's the error")
         res.status(500).send(error.message);
     }
 });

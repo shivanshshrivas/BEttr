@@ -9,9 +9,9 @@ const YouScreen = ({ navigation }) => {
 
   // Example data
   const images = [
-    { uri: 'https://picsum.photos/200/300', date: 'April 13th, 2024', tag: 'Education' },
-    { uri: 'https://picsum.photos/200/300', date: 'April 12th, 2024', tag: 'Environmental' },
-    { uri: 'https://picsum.photos/200/300', date: 'April 11th, 2024', tag: 'Education' },
+    { path: require('./old1.png'), date: 'April 13th, 2024', tag: 'Education' },
+    { path:require('./old2.png'), date: 'April 12th, 2024', tag: 'Environmental' },
+    { path: require('./old3.png'), date: 'April 11th, 2024', tag: 'Education' },
   ];
 
   const tags = [
@@ -23,20 +23,20 @@ const YouScreen = ({ navigation }) => {
   ];
 
   const achievements = [
-    { icon: 'https://picsum.photos/200/300', date: '2021-09-15' },
-    { icon: 'https://picsum.photos/200/300', date: '2021-10-01' },
-    { icon: 'https://picsum.photos/200/300', date: '2021-11-23' },
+    { icon: require('./education.png'), date: 'Earned: 12/12/23' },
+    { icon: require('./poverty.png'), date: 'Earned: 8/28/22' },
+    { icon: require('./community.png'), date: 'Earned: 2/28/24' },
   ];
 
   const upcoming = [
-    { icon: 'https://picsum.photos/200/300', activitiesNeeded: 5 },
-    { icon: 'https://picsum.photos/200/300', activitiesNeeded: 3 },
-    { icon: 'https://picsum.photos/200/300', activitiesNeeded: 7 },
+    { icon:require('./social.png'), activitiesNeeded: 5 },
+    { icon: require('./enviornmental.png'), activitiesNeeded: 3 },
+    { icon: require('./other.png'), activitiesNeeded: 7 },
   ];
 
   const renderImageItem = ({ item }) => (
     <View style={styles.imageContainer}>
-      <Image source={{ uri: item.uri }} style={styles.image} />
+      <Image source={item.path} style={styles.image} />
       <Text style={styles.date}>{item.date}</Text>
       <Text style={styles.tag}>{item.tag}</Text>
     </View>
@@ -75,7 +75,7 @@ const YouScreen = ({ navigation }) => {
       >
         {/* Face Side */}
         <View style={styles.upcomingItem}>
-          <Image source={{ uri: item.icon }} style={styles.upcomingIcon} />
+          <Image source={item.icon} style={styles.upcomingIcon} />
         </View>
         {/* Back Side */}
         <View style={styles.upcomingItemBack}>
@@ -88,7 +88,7 @@ const YouScreen = ({ navigation }) => {
   return (
     <View style={{ flex: 1 }}>
       <Header navigation={navigation} />
-      <ScrollView style={{ flex: 1 }}>
+      <ScrollView style={{ flex: 1, backgroundColor: '#A1686D' }}>
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>Your Recent Activity</Text>
           <FlatList
@@ -118,7 +118,7 @@ const YouScreen = ({ navigation }) => {
             data={achievements}
             renderItem={({ item }) => (
               <View style={styles.achievementItem}>
-                <Image source={{ uri: item.icon }} style={styles.achievementIcon} />
+                <Image source={item.icon} style={styles.achievementIcon} />
                 <Text style={styles.achievementDate}>{item.date}</Text>
               </View>
             )}
@@ -162,10 +162,21 @@ const styles = StyleSheet.create({
     borderRadius: 8,
   },
   sectionTitle: {
-    fontSize: 20,
+    fontSize: 30,
     fontWeight: 'bold',
     marginHorizontal: 10,
     marginBottom: 10,
+    letterSpacing: 2,
+    fontFamily: "Times New Roman",
+    alignContent: 'center',
+
+  },
+  date:{
+    padding:5,
+    fontFamily: 'Times New Roman',
+  },
+  tag:{
+    fontFamily:'Times New Roman',
   },
   tagContainer: {
     alignItems: 'center',
@@ -186,18 +197,22 @@ const styles = StyleSheet.create({
   tagText: {
     textAlign: 'center',
     marginTop: 10,
+    fontFamily: "Times New Roman",
+    letterSpacing: 2,
   },
   achievementItem: {
     alignItems: 'center',
     marginHorizontal: 10,
   },
   achievementIcon: {
-    width: 50,
-    height: 50,
+    width: 75,
+    height: 75,
     borderRadius: 25,
   },
   achievementDate: {
     marginTop: 5,
+    fontFamily: "Times New Roman",
+    letterSpacing: 2,
   },
   flipCard: {
     width: 100,
@@ -209,15 +224,16 @@ const styles = StyleSheet.create({
     height: 100,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#FFF',
+
   },
   upcomingItemBack: {
     width: 100,
     height: 100,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#FDD',
+    backgroundColor: '#FFD5C2',
     borderRadius: 50,
+    
   },
   upcomingIcon: {
     width: 80,

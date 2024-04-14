@@ -1,12 +1,12 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet ,Image} from 'react-native';
 
 const Header = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <TouchableOpacity onPress={() => navigation.navigate(Profile)}>
         <View style={styles.profileIcon}>
-          {/* Placeholder for the profile icon */}
+          <Image source={require('./jahnvi.png')} style={styles.profileIcon}/>
         </View>
       </TouchableOpacity>
 
@@ -36,8 +36,8 @@ const styles = StyleSheet.create({
     shadowOffset: { height: 3, width: 0 },
   },
   profileIcon: {
-    width: 40,
-    height: 40,
+    width: 45,
+    height: 45,
     borderRadius: 20,
     backgroundColor: '#ffffff', // Example color
   },
@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
     fontSize: 40,
     fontWeight: 'bold',
     fontFamily: "Times New Roman",
-    letterSpacing: 3, // Adjust the value as needed
+    letterSpacing: 4, // Adjust the value as needed
   },
   streak: {
     flexDirection: 'row',

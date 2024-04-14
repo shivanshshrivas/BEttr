@@ -1,9 +1,9 @@
 import React from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native';
-import FeedIcon from './homeicon.png'; // Import your feed icon image
-import NearbyIcon from './pinicon.png'; // Import your nearby icon image
-import LeaderboardIcon from './trophyicon.png'; // Import your leaderboard icon image
-import YouIcon from './profileicon.png'; // Import your "You" icon image
+import FeedIcon from './homeicon.png';
+import NearbyIcon from './pinicon.png';
+import LeaderboardIcon from './trophyicon.png';
+import YouIcon from './profileicon.png';
 
 const BottomTabBar = ({ navigation }) => {
   return (
@@ -39,8 +39,8 @@ const styles = StyleSheet.create({
     
   },
   icon: {
-    width: 30, // Adjust the width of the icon as needed
-    height: 30, // Adjust the height of the icon as needed
+    width: 30, 
+    height: 30, 
   },
 });
 
