@@ -11,6 +11,16 @@
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
+    "plugins":[
+      [
+        "expo-camera",
+        {
+          "cameraPermissions": "Allow app to acces your camera",
+          "microphonePermissions": "Allow app to acces your microphone",
+          "recordAudioAndriod": true
+        }
+      ]
+    ],
     "assetBundlePatterns": [
       "**/*"
     ],

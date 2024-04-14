@@ -6,6 +6,7 @@ import NearbyScreen from './Nearby';
 import LeaderBoardScreen from './LeaderBoardScreen';
 import YouScreen from './YouScreen';
 import Profile from './Profile';
+import CameraScreen from './CameraScreen';
 
 const Tab = createBottomTabNavigator();
 
@@ -22,9 +23,10 @@ const App = () => {
       >
         <Tab.Screen name="Feed" component={Feed} />
         <Tab.Screen name="Around You" component={NearbyScreen} />
-        <Tab.Screen name="Leader Board" component={LeaderBoardScreen} />
+        <Tab.Screen name="Leader Board" component={LeaderBoardScreen} /> 
         <Tab.Screen name="You" component={YouScreen} />
-        <Tab.Screen name="Profile" component={Profile} />
+        <Tab.Screen name="Profile" component={Profile} options={{tabBarButton: () => null, tabBarVisible: false}}/>
+        <Tab.Screen name="Camera" component={CameraScreen} options={{tabBarButton: () => null, tabBarVisible: false}}/>
       </Tab.Navigator>
     </NavigationContainer>
   );

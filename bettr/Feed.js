@@ -1,7 +1,6 @@
 import React, {useState} from 'react';
 import { View, Text, StyleSheet, ScrollView, Image, TouchableOpacity } from 'react-native';
 import Header from './Header';
-import CameraScreen from './CameraScreen';
 
 const Feed = ({ navigation }) => {
   // Placeholder data for your images
@@ -33,7 +32,7 @@ const Feed = ({ navigation }) => {
       </ScrollView>
       <TouchableOpacity
         style={styles.fab}
-        onPress={() => navigation.navigate(CameraScreen, { onPictureTaken: addNewImage })}
+        onPress={() => navigation.navigate('Camera', { onPictureTaken: addNewImage })}
       >
         <Text style={styles.fabIcon}>+</Text>
       </TouchableOpacity>
