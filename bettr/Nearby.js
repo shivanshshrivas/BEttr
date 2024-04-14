@@ -7,43 +7,43 @@ const NearbyScreen = ({ navigation }) => {
     {
       username: "yashla",
       location: "Baroda",
-      profilePic: "https://picsum.photos/200/300",
-      imageUrl: "https://picsum.photos/200/300",
+      profilePic: require("./yash.png"),
+      imageUrl: require("./yashimage.png"),
       caption: "Today I helped an old man with his investment portofolio and helped him gain money!!"
     },
     {
       username: "minhee_koo",
       location: "Korea",
-      profilePic: "https://picsum.photos/200/300",
-      imageUrl: "https://picsum.photos/200/300",
+      profilePic: require("./minhee.png"),
+      imageUrl: require("./minheehelp.png"),
       caption: "Exploring the bustling streets of downtown, I saw a pregrant lady that needed help with her groceries and walked her to the bus station."
     },
     {
       username: "bgoplani",
       location: "Dubai",
-      profilePic: "https://picsum.photos/200/300",
-      imageUrl: "https://picsum.photos/200/300",
+      profilePic: require("./bhavik.png"),
+      imageUrl: require("./bhavikhelp.png"),
       caption: "While enjoying the crystal clear waters in the tropics, someone was drowning so I decided to save them and felt much gratitude.  "
     },
     {
       username: "glizzrbear",
       location: "Ancient Czech Republic",
-      profilePic: "https://picsum.photos/200/300",
-      imageUrl: "https://picsum.photos/200/300",
+      profilePic: require("./glizzy.png"),
+      imageUrl:  require("./glizzyhelp.png"),
       caption: "Visiting the ancient ruins was a blast! But when someone fell down the stairs and hurt their ankle, I helped them walk all the way back to the rest area."
     },
     {
       username: "nanya_business",
       location: "Chennai",
-      profilePic: "https://picsum.photos/200/300",
-      imageUrl: "https://picsum.photos/200/300",
+      profilePic: require("./nanya.png"),
+      imageUrl:require("./nanyahelp.png"),
       caption: "Tried some exotic dishes today and my sister started choking so I saved her and saved the day!"
     },
     // Add more posts as needed
   ];
 
   return (
-    <View style={{ flex: 1 }}>
+    <View style={{ flex: 1}}>
       <Header navigation={navigation} />
       <ScrollView style={styles.container}>
         <Text style={styles.headerText}>Around You</Text>
@@ -51,12 +51,12 @@ const NearbyScreen = ({ navigation }) => {
           <View key={index} style={styles.postContainer}>
             <View style={styles.userContainer}>
               <View style={styles.userInfo}>
-                <Image source={{ uri: post.profilePic }} style={styles.profilePic} />
+                <Image source={post.profilePic} style={styles.profilePic} />
                 <Text style={styles.username}>{post.username}</Text>
               </View>
               <Text style={styles.location}>📍{post.location}</Text>
             </View>
-            <Image source={{ uri: post.imageUrl }} style={styles.postImage} />
+            <Image source={post.imageUrl} style={styles.postImage} />
             <Text style={styles.caption}>{post.caption}</Text>
           </View>
         ))}
@@ -75,6 +75,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     padding: 10,
     textAlign: 'center',
+    fontFamily: 'Times New Roman',
   },
   postContainer: {
     width: '95%',
@@ -105,7 +106,9 @@ const styles = StyleSheet.create({
     marginRight: 10,
   },
   username: {
+    fontSize: 20,
     fontWeight: 'bold',
+    fontFamily: 'Times New Roman',
   },
   location: {
     fontStyle: 'italic',
@@ -121,6 +124,8 @@ const styles = StyleSheet.create({
   },
   caption: {
     padding: 10,
+    fontSize: 15,
+    fontFamily: 'Times New Roman',
   },
 });
 

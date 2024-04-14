@@ -26,8 +26,6 @@ const CameraScreen = ({ route, navigation }) => {
         base64: data.base64
       };
 
-      console.log({ imageInfo }, { depth: null })
-
       // Send data to your server
       fetch('https://d829-129-237-90-141.ngrok-free.app/upload', {
         method: 'POST',
@@ -35,10 +33,12 @@ const CameraScreen = ({ route, navigation }) => {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(imageInfo),
+        
       })
-      .then(response => response.json())
+      .then(response => response.json(), console.log(response.json()))
       .then(responseData => {
         console.log(responseData);
+        console.log(typeof responseData);
         navigation.goBack();
       })
       .catch(error => {

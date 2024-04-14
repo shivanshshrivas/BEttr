@@ -8,9 +8,9 @@ const Feed = ({ navigation }) => {
 
   const fetchImages = async () => {
     try {
-      const response = await fetch('https://d829-129-237-90-141.ngrok-free.app/images');
+      const response=await fetch('https://d829-129-237-90-141.ngrok-free.app/images');
       const images = await response.json();
-      setImageData(images);
+      setImageData(images.map(img => ({ ...img, liked: false }))); // Add liked state to each image
     } catch (error) {
       console.error('Failed to fetch images:', error);
     }
@@ -24,6 +24,14 @@ const Feed = ({ navigation }) => {
     setTrigger(prev => !prev); // Toggle the trigger to force useEffect to run again
   };
 
+  const toggleLike = (id) => {
+    setImageData(currentData =>
+      currentData.map(img => 
+        img.id === id ? { ...img, liked: !img.liked } : img
+      )
+    );
+  };
+
   return (
     <View style={{ flex: 1 }}>
       <Header navigation={navigation} />
@@ -35,9 +43,12 @@ const Feed = ({ navigation }) => {
             </View>
             
             <Image source={{ uri: image.uri }} style={styles.image} />
-            <TouchableOpacity style={styles.likeButton}>
+            <TouchableOpacity
+              style={[styles.likeButton, image.liked ? { backgroundColor: '#98002e' } : {}]}
+              onPress={() => toggleLike(image.id)}
+            >
               <Image source={require('./likeicon.png')} style={styles.likeIcon} />
-              <Text style={styles.likeButtonText}>Like</Text>
+              <Text style={styles.likeButtonText}>{image.liked ? 'Liked' : 'Like'}</Text>
             </TouchableOpacity>
             <Text style={styles.imageDescription}>{image.description}</Text>
           </View>
@@ -75,7 +86,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.5,
     shadowRadius: 10,
     shadowColor: '#000',
-    shadowOffset: { height: 2, width: 0 }, // Shadow around images
+    shadowOffset: { height: 2, width: 0 },
   },
   textContainer: {
     padding: 10,
@@ -86,25 +97,25 @@ const styles = StyleSheet.create({
     width: '90%',
     alignSelf: 'center',
     height: 'auto',
-    aspectRatio: 1, // Adjust the aspect ratio
+    aspectRatio: 1,
     borderRadius: 20,
   },
   likeButton: {
-    flexDirection: 'row', // Align items horizontally
+    flexDirection: 'row',
     position: 'absolute',
     bottom: 10,
     right: 10,
     backgroundColor: '#FFD5C2',
     padding: 8,
     borderRadius: 20,
-    alignItems: 'center', // Center items vertically in the button
+    alignItems: 'center',
   },
   likeIcon: {
     width: 20,
-    height: 20, // Set the size of your icon image
+    height: 20,
   },
   likeButtonText: {
-    marginLeft: 5, // Space between icon and text
+    marginLeft: 5,
     fontSize: 16,
     color: '#000',
   },

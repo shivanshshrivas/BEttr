@@ -7,29 +7,23 @@ const LeaderBoardScreen = ({navigation}) => {
 
   const renderLeaderboard = () => {
     const users = [
-      { name: 'your mom', rank: 1, points: 100 },
-      { name: 'is', rank: 2, points: 80 },
-      { name: 'actually', rank: 3, points: 70 },
-      { name: 'gay', rank: 4, points: 60 },
-      { name: 'bro', rank: 5, points: 50 },
-      { name: 'your mom', rank: 1, points: 100 },
-      { name: 'is', rank: 2, points: 80 },
-      { name: 'actually', rank: 3, points: 70 },
-      { name: 'gay', rank: 4, points: 60 },
-      { name: 'bro', rank: 5, points: 50 }, { name: 'your mom', rank: 1, points: 100 },
-      { name: 'is', rank: 2, points: 80 },
-      { name: 'actually', rank: 3, points: 70 },
-      { name: 'gay', rank: 4, points: 60 },
-      { name: 'bro', rank: 5, points: 50 }, { name: 'your mom', rank: 1, points: 100 },
-      { name: 'is', rank: 2, points: 80 },
-      { name: 'actually', rank: 3, points: 70 },
-      { name: 'gay', rank: 4, points: 60 },
-      { name: 'bro', rank: 5, points: 50 }, { name: 'your mom', rank: 1, points: 100 },
-      { name: 'is', rank: 2, points: 80 },
-      { name: 'actually', rank: 3, points: 70 },
-      { name: 'gay', rank: 4, points: 60 },
-      { name: 'bro', rank: 5, points: 50 },
+      { name: 'Amber Phoenix', rank: 1, points: 100 },
+      { name: 'Maxwell Irons', rank: 2, points: 80 },
+      { name: 'Jasmine Bloom', rank: 3, points: 70 },
+      { name: 'Ethan Storm', rank: 4, points: 60 },
+      { name: 'Nora Springs', rank: 5, points: 50 },
+      { name: 'Leo Wilder', rank: 6, points: 45 },
+      { name: 'Cora Light', rank: 7, points: 40 },
+      { name: 'Ivy Summers', rank: 8, points: 35 },
+      { name: 'Kai Ocean', rank: 9, points: 30 },
+      { name: 'Luna Star', rank: 10, points: 25 },
+      { name: 'Finn Blaze', rank: 11, points: 20 },
+      { name: 'Zoe Night', rank: 12, points: 15 },
+      { name: 'Milo Peak', rank: 13, points: 10 },
+      { name: 'Ella Snow', rank: 14, points: 5 },
+      { name: 'Theo Cloud', rank: 15, points: 0 }
     ];
+    
     return (
       <View style={styles.leaderboardContainer}>
         <Text style={styles.leaderboardTitle}>Leaderboard</Text>
@@ -83,11 +77,13 @@ const styles = StyleSheet.create({
     width: '95%',
   },
   leaderboardTitle: {
-    fontSize: 20,
+    fontSize: 30,
     fontWeight: 'bold',
     color: '#FFD5C2',
     textAlign: 'center',
     marginVertical: 10,
+    fontFamily:"Times New Roman",
+    letterSpacing: 2,
   },
   scrollContainer: {
     alignItems: 'center',
@@ -104,13 +100,17 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
   },
   tableHeader: {
-    fontSize: 16,
+    fontSize: 19,
     fontWeight: 'bold',
     color: '#FFD5C2',
+    fontFamily:"Times New Roman",
+    letterSpacing: 2,
   },
   tableCell: {
-    fontSize: 16,
+    fontSize: 17,
     color: '#FFD5C2',
+    fontFamily:"Times New Roman",
+    letterSpacing: 2,
   },
 });
 
