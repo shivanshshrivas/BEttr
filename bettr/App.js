@@ -7,18 +7,17 @@ import LeaderBoardScreen from './LeaderBoardScreen';
 import YouScreen from './YouScreen';
 import Profile from './Profile';
 import CameraScreen from './CameraScreen';
+import BottomTabBar from './BottomTabBar';
 
 const Tab = createBottomTabNavigator();
 
 const App = () => {
   return (
     <NavigationContainer>
-      <Tab.Navigator 
+      <Tab.Navigator
+        tabBar={props => <BottomTabBar {...props} />}
         screenOptions={{
-          tabBarStyle: { backgroundColor: '#800020' }, // Color of the tab bar
-          tabBarShowLabel: false,
-          headerShown: false,
-          tabBarHideOnKeyboard: true,
+          headerShown: false // This will hide the header for all screens
         }}
       >
         <Tab.Screen name="Feed" component={Feed} />

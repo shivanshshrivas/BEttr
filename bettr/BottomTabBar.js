@@ -1,56 +1,47 @@
 import React from 'react';
-import Feed from './Feed';
-import Nearby from './Nearby';
-import LeaderBoard from './LeaderBoardScreen';
-import You from './YouScreen';
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native';
+import FeedIcon from './homeicon.png'; // Import your feed icon image
+import NearbyIcon from './pinicon.png'; // Import your nearby icon image
+import LeaderboardIcon from './trophyicon.png'; // Import your leaderboard icon image
+import YouIcon from './profileicon.png'; // Import your "You" icon image
 
 const BottomTabBar = ({ navigation }) => {
-  const tabs = [
-    { name: 'Feed', screen: Feed, icon: '🏠' },
-    { name: 'Around You', screen: Nearby, icon: '📍'},
-    { name: 'Leader Board', screen: LeaderBoard , icon: '🏆'},
-    { name: 'You', screen: You , icon: '👤'}
-  ];
-
   return (
-    <View style= {styles.container}>
-        <TouchableOpacity key={index} onPress={() => navigation.navigate(Feed)}>
-          <View>
-            <Text >{tab.icon}</Text>
-          </View>
-        </TouchableOpacity>
-        <TouchableOpacity key={index} onPress={() => navigation.navigate(Feed)}>
-          <View>
-            <Text >{tab.icon}</Text>
-          </View>
-        </TouchableOpacity>
-        <TouchableOpacity key={index} onPress={() => navigation.navigate(Feed)}>
-          <View>
-            <Text >{tab.icon}</Text>
-          </View>
-        </TouchableOpacity>
+    <View style={styles.container}>
+      <TouchableOpacity onPress={() => navigation.navigate('Feed')}>
+        <Image source={FeedIcon} style={styles.icon} />
+      </TouchableOpacity>
+      <TouchableOpacity onPress={() => navigation.navigate('Around You')}>
+        <Image source={NearbyIcon} style={styles.icon} /> 
+      </TouchableOpacity>
+      <TouchableOpacity onPress={() => navigation.navigate('Leader Board')}>
+        <Image source={LeaderboardIcon} style={styles.icon} />
+      </TouchableOpacity>
+      <TouchableOpacity onPress={() => navigation.navigate('You')}>
+        <Image source={YouIcon} style={styles.icon} />
+      </TouchableOpacity>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  container:{
-    padding: 44,
+  container: {
+    paddingVertical: 20,
+    paddingHorizontal: 40,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    backgroundColor: '#800020', // Set your desired color
-    paddingVertical: 10,
-    paddingHorizontal: 20,
+    backgroundColor: '#643F43',
+    shadowOpacity: 0.7,
+    shadowRadius: 12,
+    shadowColor: '#000',
+    shadowOffset: { height: 3, width: 0 },
+    
   },
-  profileText: {
-    color: '#ffffff',
-    fontSize: 20,
-    fontWeight: 'bold',
+  icon: {
+    width: 30, // Adjust the width of the icon as needed
+    height: 30, // Adjust the height of the icon as needed
   },
-  
 });
-
 
 export default BottomTabBar;

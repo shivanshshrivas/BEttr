@@ -1,6 +1,5 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
-import Profile from './Profile';
 
 const Header = ({ navigation }) => {
   return (
@@ -16,7 +15,7 @@ const Header = ({ navigation }) => {
       </TouchableOpacity>
 
       <View style={styles.streak}>
-        <Text style={styles.streakText}>🔥</Text>
+        <Text style={styles.streakText}>12🔥</Text>
       </View>
     </View>
   );
@@ -28,9 +27,13 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    backgroundColor: '#800020', // Set your desired color
+    backgroundColor: '#643F43', // Set your desired color
     paddingVertical: 10,
     paddingHorizontal: 20,
+    shadowOpacity: 0.5,
+    shadowRadius: 5,
+    shadowColor: '#000',
+    shadowOffset: { height: 3, width: 0 },
   },
   profileIcon: {
     width: 40,
@@ -39,17 +42,21 @@ const styles = StyleSheet.create({
     backgroundColor: '#ffffff', // Example color
   },
   title: {
-    color: '#ffffff',
-    fontSize: 20,
+    color: '#FFD5C2',
+    fontSize: 40,
     fontWeight: 'bold',
+    fontFamily: "Times New Roman",
+    letterSpacing: 3, // Adjust the value as needed
   },
   streak: {
     flexDirection: 'row',
     alignItems: 'center',
   },
   streakText: {
-    color: '#ffffff',
-    fontSize: 16,
+    color: '#FFD5C2',
+    fontSize: 20,
+    fontStyle: 'bold',
+    fontFamily: "Times New Roman",
   },
 });
 

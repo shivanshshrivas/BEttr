@@ -5,39 +5,39 @@ import { View, Text, StyleSheet, ScrollView, Image } from 'react-native';
 const NearbyScreen = ({ navigation }) => {
   const posts = [
     {
-      username: "nature_lover",
-      location: "Mountains",
+      username: "yashla",
+      location: "Baroda",
       profilePic: "https://picsum.photos/200/300",
       imageUrl: "https://picsum.photos/200/300",
-      caption: "A beautiful sunset over the mountains 🌄"
+      caption: "Today I helped an old man with his investment portofolio and helped him gain money!!"
     },
     {
-      username: "city_explorer",
-      location: "Downtown",
+      username: "minhee_koo",
+      location: "Korea",
       profilePic: "https://picsum.photos/200/300",
       imageUrl: "https://picsum.photos/200/300",
-      caption: "Exploring the bustling streets of downtown!"
+      caption: "Exploring the bustling streets of downtown, I saw a pregrant lady that needed help with her groceries and walked her to the bus station."
     },
     {
-      username: "ocean_addict",
-      location: "Tropics",
+      username: "bgoplani",
+      location: "Dubai",
       profilePic: "https://picsum.photos/200/300",
       imageUrl: "https://picsum.photos/200/300",
-      caption: "Crystal clear waters in the tropics 🌊"
+      caption: "While enjoying the crystal clear waters in the tropics, someone was drowning so I decided to save them and felt much gratitude.  "
     },
     {
-      username: "history_buff",
-      location: "Ancient Ruins",
+      username: "glizzrbear",
+      location: "Ancient Czech Republic",
       profilePic: "https://picsum.photos/200/300",
       imageUrl: "https://picsum.photos/200/300",
-      caption: "Visiting the ancient ruins was a blast!"
+      caption: "Visiting the ancient ruins was a blast! But when someone fell down the stairs and hurt their ankle, I helped them walk all the way back to the rest area."
     },
     {
-      username: "foodie_journey",
-      location: "Exotic Dishes",
+      username: "nanya_business",
+      location: "Chennai",
       profilePic: "https://picsum.photos/200/300",
       imageUrl: "https://picsum.photos/200/300",
-      caption: "Tried some exotic dishes today!"
+      caption: "Tried some exotic dishes today and my sister started choking so I saved her and saved the day!"
     },
     // Add more posts as needed
   ];
@@ -68,6 +68,7 @@ const NearbyScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#A1686D',
   },
   headerText: {
     fontSize: 24,
@@ -76,19 +77,16 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   postContainer: {
-    marginBottom: 20,
-    backgroundColor: '#fff',
-    borderRadius: 15,
-    borderWidth: 1,
-    borderColor: '#e1e1e1',
-    overflow: 'hidden',
-    elevation: 1, // subtle shadow for Android
-    shadowColor: '#000', // shadow for iOS
-    shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.3,
-    shadowRadius: 1,
-    alignSelf: "center",
-    width: "95%",
+    width: '95%',
+    alignSelf: 'center',
+    marginVertical: 10,
+    position: 'relative',
+    backgroundColor: '#A97579',
+    borderRadius: 25,
+    shadowOpacity: 0.5,
+    shadowRadius: 10,
+    shadowColor: '#000',
+    shadowOffset: { height: 2, width: 0 }, // Shadow around ima
   },
   userContainer: {
     flexDirection: 'row',
