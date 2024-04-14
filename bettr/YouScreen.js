@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet, ScrollView, Image, FlatList } from 'react-native';
 import Header from './Header';
-import * as Progress from 'react-native-progress';
+import ProgressBar from 'react-native-progress/Bar';
 
 const YouScreen = ({ navigation }) => {
   // Example data
@@ -44,13 +44,15 @@ const YouScreen = ({ navigation }) => {
 
   const renderTagItem = ({ item }) => (
     <View style={styles.tagContainer}>
-      <Progress.Circle
+      <ProgressBar
         progress={item.progress}
-        size={60}
-        showsText={true}
-        formatText={() => `${Math.round(item.progress * 100)}%`}
-        thickness={5}
-        color={'#800020'} // Progress circle color
+        width={200}
+        height={20}
+        color={item.progress > 0.5 ? '#4CAF50' : '#FFC107'} // Dynamic color based on progress
+        unfilledColor="#E0E0E0"
+        borderWidth={0}
+        useNativeDriver={true}
+        animationType="spring"
       />
       <Text style={styles.tagText}>{item.tag}</Text>
     </View>
@@ -85,6 +87,11 @@ const YouScreen = ({ navigation }) => {
 
       <View style={styles.tagSection}>
       <Text style={styles.tagTitle}>Your Progress</Text>
+      <View style={{backgroundColor: 'white', width: '95%', borderRadius: 15, alignSelf: 'center', padding: 5,elevation: 1, // subtle shadow for Android
+    shadowColor: '#000', // shadow for iOS
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.3,
+    shadowRadius: 1,}}>
         <FlatList
           horizontal
           data={tags}
@@ -92,6 +99,7 @@ const YouScreen = ({ navigation }) => {
           keyExtractor={(item, index) => index.toString()}
           showsHorizontalScrollIndicator={false}
         />
+        </View>
       </View>
 
       <View style={styles.achievementSection}>
@@ -121,18 +129,11 @@ const YouScreen = ({ navigation }) => {
 };
 
 const styles = StyleSheet.create({
-  wrapper: {
-    height: 240,
-  },
-  slide: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
+  // Updated styles to better align with the aesthetic theme
   imageSection: {
-    backgroundColor: '#E8EAF6', // Light purple background color
+    backgroundColor: '#F5F5F5',
     paddingVertical: 10,
-    paddingBottom: 7,
+    paddingHorizontal: 5,
     alignItems: 'center',
   },
   imageContainer: {
@@ -142,34 +143,37 @@ const styles = StyleSheet.create({
   image: {
     width: 250,
     height: 250,
-    borderRadius: 60, // Fully rounded image
+    borderRadius: 8, // Adjusted for slightly rounded corners
   },
   tagSection: {
-    backgroundColor: '#C5CAE9', // Slightly darker purple background color
-    paddingVertical: 15,
+    backgroundColor: '#E3F2FD',
+    paddingVertical: 10,
+    paddingHorizontal: 5,
   },
   tagContainer: {
     alignItems: 'center',
     marginHorizontal: 10,
+    padding:10,
   },
-  tagTitle: {
-    fontSize: 22,
+  sectionTitle: {
+    fontSize: 20,
     fontWeight: 'bold',
-    marginLeft: 10,
+    marginHorizontal: 10,
+    marginBottom: 10,
+  },
+  tagTitle:{
+    fontSize: 20,
+    fontWeight: 'bold',
+    marginHorizontal: 10,
     marginBottom: 10,
   },
   tagText: {
     marginTop: 5,
   },
   achievementSection: {
-    backgroundColor: '#9FA8DA', // Even darker purple background color
-    paddingVertical: 15,
-  },
-  achievementTitle: {
-    fontSize: 22,
-    fontWeight: 'bold',
-    marginLeft: 10,
-    marginBottom: 10,
+    backgroundColor: '#EDE7F6',
+    paddingVertical: 10,
+    paddingHorizontal: 5,
   },
   achievementItem: {
     alignItems: 'center',
@@ -179,32 +183,23 @@ const styles = StyleSheet.create({
     width: 50,
     height: 50,
     borderRadius: 25, // Circular icons
-    padding: 30,
   },
   achievementDate: {
     marginTop: 5,
   },
   upcomingSection: {
-    backgroundColor: '#7986CB', // Dark purple background color
-    paddingVertical: 15,
-  },
-  upcomingTitle: {
-    fontSize: 22,
-    fontWeight: 'bold',
-    marginLeft: 10,
-    marginBottom: 10,
+    backgroundColor: '#E0F7FA',
+    paddingVertical: 10,
+    paddingHorizontal: 5,
   },
   upcomingItem: {
     alignItems: 'center',
     marginHorizontal: 10,
-    justifyContent: 'space-between',
   },
   upcomingIcon: {
     width: 50,
     height: 50,
-    borderRadius: 25, // Circular icons
-    padding: 30,
-    
+    borderRadius: 25, // Circular icons with opacity for upcoming badges
   },
 });
 
